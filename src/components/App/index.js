@@ -1,9 +1,19 @@
+import { Box, Container } from "@material-ui/core"
+
+import Header from "../Header"
+import Main from "../Main"
 import React from "react"
 
 function App() {
   return (
     <div>
-      <h1>App</h1>
+      <Header />
+
+      <Box mt={2}>
+        <Container>
+          <Main />
+        </Container>
+      </Box>
     </div>
   )
 }
