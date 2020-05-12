@@ -13,6 +13,27 @@ import FileCopyIcon from "@material-ui/icons/FileCopy"
 import GTranslateIcon from "@material-ui/icons/GTranslate"
 import queryString from "query-string"
 
+const ellipses = [
+  "al.", // et al.
+  "conf.",
+  "div.",
+  "doc.",
+  "e.g.",
+  "etc.",
+  "ex.",
+  "fig.",
+  "i.e.",
+  "inf.",
+  "no.",
+  "p.",
+  "pp.",
+  "sec.",
+  "seq.",
+  "tab.",
+].map((x) => {
+  return x.substr(0, x.length - 1)
+})
+
 class Main extends Component {
   constructor(props) {
     super(props)
@@ -38,7 +59,23 @@ class Main extends Component {
       return plainText
     }
 
-    let lineBrokenText = plainText.replace(/\.\s/g, ".\n\n")
+    let sentences = plainText.split(". ")
+    let lineBrokenText = ""
+
+    for (let i = 0; i < sentences.length; i++) {
+      let words = sentences[i].split(" ")
+      let lastWord = words[words.length - 1]
+
+      if (ellipses.includes(lastWord.toLowerCase())) {
+        lineBrokenText += words.join(" ") + ". "
+      } else {
+        if (i == sentences.length - 1) {
+          lineBrokenText += words.join(" ")
+        } else {
+          lineBrokenText += words.join(" ") + ".\n\n"
+        }
+      }
+    }
 
     return lineBrokenText
   }
