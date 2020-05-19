@@ -11,6 +11,7 @@ import React, { Component } from "react"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import GTranslateIcon from "@material-ui/icons/GTranslate"
+import TranslateIcon from "@material-ui/icons/Translate"
 import queryString from "query-string"
 
 const ellipses = [
@@ -88,6 +89,22 @@ class Main extends Component {
 
     window.open(
       `https://translate.google.com/?${queryString.stringify(params)}`
+    )
+
+    if (this.state.autoClear) {
+      this.clearText()
+    }
+  }
+
+  handleTranslateWithDeepLTranslator = () => {
+    const params = {
+      text: this.state.outputText,
+    }
+
+    window.open(
+      `https://deepl.com/translator#en/ja/${queryString
+        .stringify(params)
+        .substring(5)}`
     )
 
     if (this.state.autoClear) {
@@ -194,6 +211,16 @@ class Main extends Component {
               variant="contained"
             >
               TRANSLATE WITH GOOGLE TRANSLATE
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              color="secondary"
+              onClick={this.handleTranslateWithDeepLTranslator}
+              startIcon={<TranslateIcon />}
+              variant="contained"
+            >
+              TRANSLATE WITH DEEPL TRANSLATOR
             </Button>
           </Grid>
         </Grid>
