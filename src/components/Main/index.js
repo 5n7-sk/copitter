@@ -84,6 +84,7 @@ class Main extends Component {
   handleTranslateWithGoogleTranslate = () => {
     const params = {
       sl: "auto",
+      tl: "ja",
       text: this.state.outputText,
     }
 
