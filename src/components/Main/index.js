@@ -44,8 +44,9 @@ class Main extends Component {
       outputText: "",
 
       // properties
-      autoClear: false,
-      breakLineAfterEverySentence: false,
+      autoClear: localStorage.getItem("autoClear") === "true",
+      breakLineAfterEverySentence:
+        localStorage.getItem("breakLineAfterEverySentence") === "true",
     }
   }
 
@@ -124,6 +125,8 @@ class Main extends Component {
         })
       }
     )
+
+    localStorage.setItem(e.target.name, e.target.checked.toString())
   }
 
   handleTextChange = (e) => {
